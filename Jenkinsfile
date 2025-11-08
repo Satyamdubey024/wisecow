@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+    git 'Default'
+}
+
+
     environment {
         IMAGE = "satyamdubey024/new_sh_wisecow:latest"
     }
