@@ -43,6 +43,20 @@ stage('Docker Build & Push') {
 
 
 
+        stage('Deploy to Minikube') {
+  steps {
+    sh '''
+      kubectl apply -f k8s/deployment.yaml
+      kubectl apply -f k8s/service.yaml
+      kubectl apply -f k8s/ingress.yaml
+      kubectl -n wisecow rollout status deployment/wisecow-deployment --timeout=120s
+    '''
+  }
+}
+
+
+
+
     
     }
 }
