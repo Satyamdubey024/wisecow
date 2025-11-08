@@ -19,23 +19,24 @@ pipeline {
             }
         }
 
-     //   stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t $IMAGE .'
-            }
-        } // comment
+
+
+        stage('Build Docker Image') {
+    steps {
+        sh 'docker build -t satyamdubey024/new_sh_wisecow:latest .'
+    }
+}
 
 
 
 
 
-stage('Docker Build & Push') {
+ stage('Docker Build & Push') {
     steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
             sh """
-                docker login -u $DOCKER_USER -p $DOCKER_PASS
-                docker build -t $DOCKER_USER/new_sh_wisecow .
-                docker push $DOCKER_USER/new_sh_wisecow:v1
+               sh 'docker push satyamdubey024/new_sh_wisecow:latest'
+
             """
         }
     }
